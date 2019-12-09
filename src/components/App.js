@@ -9,14 +9,20 @@ const LogoImage = styled.img.attrs(props => ({ src: logoImageUrl }))`
   width: 384px;
 `;
 
-const HeroText = styled.h1`
-  margin-top: 0;
-  margin-bottom: 1rem;
+const BigHeroText = styled.h1`
+  margin: 0;
 
   font-family: "Roboto Slab", serif;
   font-size: 96pt;
+  font-weight: 600;
   color: #829ac4;
   letter-spacing: 25px;
+  text-align: center;
+`;
+
+const SmallHeroText = styled(BigHeroText)`
+  font-size: 32pt;
+  letter-spacing: 12px;
 `;
 
 const ButtonRow = styled.div`
@@ -83,6 +89,8 @@ const ButtonLink = styled.a`
   &:active {
     outline: none;
     opacity: 1;
+    color: white;
+    text-decoration: none;
   }
 
   > img {
@@ -110,19 +118,37 @@ const DestinyButtonLink = styled(ButtonLink)`
 
 export default function App() {
   return (
-    <>
-      <LogoImage />
-      <HeroText>Exo/Terra</HeroText>
-      <ButtonRow>
-        <DiscordButtonLink href="https://discord.gg/3eEeRbS" target="_blank">
+    <div className="container">
+      <div className="row">
+        <LogoImage className="col-4 offset-4" />
+      </div>
+      <div className="row">
+        <BigHeroText className="col-12 d-none d-lg-block d-xl-block">
+          Exo/Terra
+        </BigHeroText>
+        <SmallHeroText className="col-12 d-lg-none d-xl-none">
+          Exo/Terra
+        </SmallHeroText>
+      </div>
+      <div className="row justify-content-md-center mt-5">
+        <DiscordButtonLink
+          className="col-10 offset-1 col-lg-4 offset-lg-0 mb-2"
+          href="https://discord.gg/3eEeRbS"
+          target="_blank">
           <img src={discordLogoUrl} aria-hidden={true} /> Join us on Discord
         </DiscordButtonLink>
+        <div
+          className="col-lg-1"
+          aria-hidden={true}
+          style={{ visibility: "hidden" }}
+        />
         <DestinyButtonLink
+          className="col-10 offset-1 col-lg-4 offset-lg-0 mb-2"
           href="https://www.bungie.net/en/ClanV2/Chat?groupId=3220152"
           target="_blank">
           <img src={destiny2LogoUrl} aria-hidden={true} /> Join our clan
         </DestinyButtonLink>
-      </ButtonRow>
-    </>
+      </div>
+    </div>
   );
 }
